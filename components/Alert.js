@@ -7,7 +7,7 @@ const Alert = () => {
 
   let bg;
   if (message.includes("creado")) bg = "bg-blue-400";
-  else if (message.includes("registrado")) bg = "bg-red-800";
+  else bg = "bg-red-800";
 
   return (
     <div
