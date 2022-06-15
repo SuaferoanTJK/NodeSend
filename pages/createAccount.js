@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+
+import Alert from "../components/Alert";
 import Layout from "../components/Layout";
+import authContext from "../context/auth/authContext";
 
 const createAccount = () => {
+  const AuthContext = useContext(authContext);
+  const { message, registerUser } = AuthContext;
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -20,7 +26,7 @@ const createAccount = () => {
         .required("La contraseña es obligatoria"),
     }),
     onSubmit: (values) => {
-      console.log(values);
+      registerUser(values);
     },
   });
   return (
@@ -29,6 +35,7 @@ const createAccount = () => {
         <h2 className="text-4xl font-sans font-bold text-gray-800 text-center my-4">
           Crear Cuenta
         </h2>
+        {message && <Alert />}
         <div className="flex justify-center mt-5">
           <div className="w-full max-w-lg">
             <form
