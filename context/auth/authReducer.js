@@ -2,7 +2,7 @@ import {
   USER_AUTHENTICATED,
   USER_CREATED,
   USER_ALREADY_CREATED,
-  CLEAN_ALERT,
+  HIDE_ALERT,
   USER_FAILED_LOGIN,
   USER_SUCESS_LOGIN,
   LOGOUT,
@@ -17,7 +17,7 @@ export default (state, action) => {
         ...state,
         message: action.payload,
       };
-    case CLEAN_ALERT:
+    case HIDE_ALERT:
       return {
         ...state,
         message: null,
@@ -32,7 +32,6 @@ export default (state, action) => {
     case USER_AUTHENTICATED:
       return {
         ...state,
-        authenticated: true,
         user: action.payload,
       };
     case LOGOUT:

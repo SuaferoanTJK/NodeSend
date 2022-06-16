@@ -5,7 +5,7 @@ import {
   USER_AUTHENTICATED,
   USER_CREATED,
   USER_ALREADY_CREATED,
-  CLEAN_ALERT,
+  HIDE_ALERT,
   USER_FAILED_LOGIN,
   USER_SUCESS_LOGIN,
   LOGOUT,
@@ -34,7 +34,7 @@ const AuthState = ({ children }) => {
       });
     }
     setTimeout(() => {
-      dispatch({ type: CLEAN_ALERT });
+      dispatch({ type: HIDE_ALERT });
     }, 3000);
   };
   const login = async (data) => {
@@ -51,7 +51,7 @@ const AuthState = ({ children }) => {
       });
     }
     setTimeout(() => {
-      dispatch({ type: CLEAN_ALERT });
+      dispatch({ type: HIDE_ALERT });
     }, 3000);
   };
   const userAuthenticated = async () => {
