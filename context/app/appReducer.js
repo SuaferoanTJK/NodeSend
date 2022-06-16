@@ -6,6 +6,7 @@ import {
   UPLOAD_FILE_DENIED,
   CREATE_LINK_SUCCESS,
   CREATE_LINK_DENIED,
+  CLEAN_STATE,
 } from "../../types";
 
 export default (state, action) => {
@@ -46,6 +47,18 @@ export default (state, action) => {
     case CREATE_LINK_DENIED:
       return {
         ...state,
+        url: null,
+      };
+    case CLEAN_STATE:
+      return {
+        ...state,
+        msg: null,
+        name: null,
+        nameOriginal: null,
+        loading: false,
+        downloads: 1,
+        password: null,
+        author: null,
         url: null,
       };
     default:
