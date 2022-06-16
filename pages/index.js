@@ -14,7 +14,10 @@ const Index = () => {
   const { msg, url } = AppContext;
 
   useEffect(() => {
-    userAuthenticated();
+    const token = localStorage.getItem("token");
+    if (token) {
+      userAuthenticated();
+    }
   }, []);
 
   return (

@@ -2,10 +2,16 @@ import React, { useCallback, useContext } from "react";
 import { useDropzone } from "react-dropzone";
 import { SpinnerCircular } from "spinners-react";
 import appContext from "../context/app/appContext";
+import authContext from "../context/auth/authContext";
+import Form from "./Form";
 
 const Dropzone = () => {
   const AppContext = useContext(appContext);
   const { loading, showAlert, uploadFile, createLink } = AppContext;
+
+  const AuthContext = useContext(authContext);
+  const { authenticated } = AuthContext;
+
   const onDropRejected = () => {
     showAlert(
       "El archivo supera 1MB, para tener 10MB debe obtener una cuenta gratis"
@@ -39,6 +45,7 @@ const Dropzone = () => {
         <div className="mt-10 w-full">
           <h4 className="text-2xl font-bold text-center mb-4">Archivos</h4>
           <ul>{files}</ul>
+          {authenticated && <Form />}
           {loading ? (
             <div className="flex justify-center">
               <SpinnerCircular
