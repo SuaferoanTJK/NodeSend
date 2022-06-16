@@ -7,6 +7,8 @@ import {
   CREATE_LINK_SUCCESS,
   CREATE_LINK_DENIED,
   CLEAN_STATE,
+  ADD_PASSWORD,
+  ADD_DOWNLOADS,
 } from "../../types";
 
 export default (state, action) => {
@@ -60,6 +62,16 @@ export default (state, action) => {
         password: null,
         author: null,
         url: null,
+      };
+    case ADD_PASSWORD:
+      return {
+        ...state,
+        password: action.payload,
+      };
+    case ADD_DOWNLOADS:
+      return {
+        ...state,
+        downloads: action.payload,
       };
     default:
       return state;

@@ -10,6 +10,8 @@ import {
   CREATE_LINK_SUCCESS,
   CREATE_LINK_DENIED,
   CLEAN_STATE,
+  ADD_PASSWORD,
+  ADD_DOWNLOADS,
 } from "../../types";
 import axiosClient from "../../config/axios";
 
@@ -71,6 +73,12 @@ const AppState = ({ children }) => {
   const cleanState = () => {
     dispatch({ type: CLEAN_STATE });
   };
+  const addPassword = (password) => {
+    dispatch({ type: ADD_PASSWORD, payload: password });
+  };
+  const addDownloads = (downloads) => {
+    dispatch({ type: ADD_DOWNLOADS, payload: downloads });
+  };
 
   return (
     <appContext.Provider
@@ -87,6 +95,8 @@ const AppState = ({ children }) => {
         uploadFile,
         createLink,
         cleanState,
+        addPassword,
+        addDownloads,
       }}
     >
       {children}
