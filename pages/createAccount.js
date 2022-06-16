@@ -1,41 +1,39 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useRouter } from "next/router";
 
+import Alert from "../components/Alert";
 import Layout from "../components/Layout";
 import authContext from "../context/auth/authContext";
-import Alert from "../components/Alert";
 
-const Login = () => {
+const createAccount = () => {
   const AuthContext = useContext(authContext);
-  const { login, authenticated, message } = AuthContext;
-  const router = useRouter();
-
-  useEffect(() => {
-    if (authenticated) router.push("/");
-  }, [authenticated]);
+  const { message, registerUser } = AuthContext;
 
   const formik = useFormik({
     initialValues: {
+      name: "",
       email: "",
       password: "",
     },
     validationSchema: Yup.object({
+      name: Yup.string().required("El nombre es obligatorio"),
       email: Yup.string()
         .email("No es un correo válido")
         .required("El correo es obligatorio"),
-      password: Yup.string().required("La contraseña es obligatoria"),
+      password: Yup.string()
+        .min(6, "La contraseña debe tener mínimo 6 carácteres")
+        .required("La contraseña es obligatoria"),
     }),
     onSubmit: (values) => {
-      login(values);
+      registerUser(values);
     },
   });
   return (
     <Layout>
       <div className="md:w-4/5 xl:w-3/5 mx-auto mb-32">
         <h2 className="text-4xl font-sans font-bold text-gray-800 text-center my-4">
-          Iniciar Sesión
+          Crear Cuenta
         </h2>
         {message && <Alert />}
         <div className="flex justify-center mt-5">
@@ -44,6 +42,28 @@ const Login = () => {
               className="bg-white rounded shadow-md px-8 pt-6 pb-8 mb-4"
               onSubmit={formik.handleSubmit}
             >
+              <div className="mb-4">
+                <label
+                  htmlFor="name"
+                  className="block text-black text-sm font-bold mb-2"
+                >
+                  Nombre
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  placeholder="Ingresar nombre de usuario"
+                  value={formik.values.name}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.touched.name && formik.errors.name && (
+                  <div className="text-red-700 pt-2">
+                    <p>{formik.errors.name}</p>
+                  </div>
+                )}
+              </div>
               <div className="mb-4">
                 <label
                   htmlFor="email"
@@ -91,7 +111,7 @@ const Login = () => {
               <input
                 type="submit"
                 className="bg-red-500 hover:bg-red-600 cursor-pointer w-full p-2 mt-2 rounded-lg text-white font-bold uppercase"
-                value="Ingresar"
+                value="Crear cuenta"
               />
             </form>
           </div>
@@ -101,4 +121,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default createAccount;
