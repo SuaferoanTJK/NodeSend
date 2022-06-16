@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
       <div className="bg-gray-100 min-h-screen">
         <div className="container mx-auto">
           <Header />
-          <main className="mt-16">{children}</main>
+          <main className="py-16">{children}</main>
         </div>
       </div>
     </>

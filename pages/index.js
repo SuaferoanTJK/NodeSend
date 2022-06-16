@@ -26,14 +26,14 @@ const Index = () => {
               <span className="font-bold text-red-700 text-2xl uppercase">
                 La URL es:
               </span>{" "}
-              {`${process.env.frontendURL}/enlaces/${url}`}
+              {`${process.env.frontendURL}/links/${url}`}
             </p>
             <button
               type="submit"
               className="bg-red-500 hover:bg-red-600 cursor-pointer w-3/5 p-2 rounded-lg text-white font-bold uppercase mt-5"
               onClick={() => {
                 navigator.clipboard.writeText(
-                  `${process.env.frontendURL}/enlaces/${url}`
+                  `${process.env.frontendURL}/links/${url}`
                 );
               }}
             >

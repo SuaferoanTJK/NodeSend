@@ -25,7 +25,7 @@ const AuthState = ({ children }) => {
   // Functions
   const registerUser = async (data) => {
     try {
-      const answer = await axiosClient.post("/api/usuarios", data);
+      const answer = await axiosClient.post("/api/users", data);
       dispatch({ type: USER_CREATED, payload: answer.data.msg });
     } catch (error) {
       dispatch({
