@@ -32,6 +32,7 @@ export default (state, action) => {
     case USER_AUTHENTICATED:
       return {
         ...state,
+        authenticated: true,
         user: action.payload,
       };
     case LOGOUT:

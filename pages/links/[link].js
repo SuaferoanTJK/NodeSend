@@ -29,7 +29,6 @@ export default ({ link }) => {
         <a
           href={`${process.env.backendURL}/api/files/${link.file}`}
           className="bg-red-500 hover:bg-red-600 text-center px-10 py-3 rounded-lg uppercase font-bold text-white cursor-pointer"
-          onClick={() => {}}
         >
           Click Aquí
         </a>
