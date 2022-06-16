@@ -9,6 +9,7 @@ import {
   UPLOAD_FILE_DENIED,
   CREATE_LINK_SUCCESS,
   CREATE_LINK_DENIED,
+  CLEAN_STATE,
 } from "../../types";
 import axiosClient from "../../config/axios";
 
@@ -40,7 +41,7 @@ const AppState = ({ children }) => {
   const uploadFile = async (formData, nameFile) => {
     dispatch({ type: UPLOADING_FILE });
     try {
-      const answer = await axiosClient.post("/api/archivos", formData);
+      const answer = await axiosClient.post("/api/files", formData);
       dispatch({
         type: UPLOAD_FILE_SUCCESS,
         payload: { name: answer.data.file, nameFile },
@@ -61,12 +62,14 @@ const AppState = ({ children }) => {
       author: state.author,
     };
     try {
-      const answer = await axiosClient.post("/api/enlaces", data);
+      const answer = await axiosClient.post("/api/links", data);
       dispatch({ type: CREATE_LINK_SUCCESS, payload: answer.data.msg });
     } catch (error) {
       dispatch({ type: CREATE_LINK_DENIED });
-      // console.log(error);
     }
+  };
+  const cleanState = () => {
+    dispatch({ type: CLEAN_STATE });
   };
 
   return (
@@ -83,6 +86,7 @@ const AppState = ({ children }) => {
         showAlert,
         uploadFile,
         createLink,
+        cleanState,
       }}
     >
       {children}
